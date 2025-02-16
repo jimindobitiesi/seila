@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabriel é o Cara Mais Legal</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        .box {
+            width: 300px;
+            height: 100px;
+            margin: 10px;
+            padding: 20px;
+            background-color: white;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .box3 {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .celebration {
+            position: fixed;
+            z-index: 1000;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #ffeb3b;
+            border-radius: 10px;
+            font-size: 24px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            opacity: 0.8;
+            pointer-events: none;
+            animation: fall 2s linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100vh); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>O Gabriel é o cara mais legal que você conhece?</h2>
+    </div>
+    <div class="box box3">
+        <button id="yesBtn">Sim</button>
+        <button id="noBtn">Não</button>
+    </div>
+    <div id="celebration" class="celebration hidden">Você é incrível!</div>
+
+    <script>
+        document.getElementById('yesBtn').addEventListener('click', function() {
+            document.getElementById('celebration').classList.remove('hidden');
+            createConfetti();
+        });
+
+        document.getElementById('noBtn').addEventListener('click', function() {
+            createBox();
+        });
+
+        function createBox() {
+            const newBox = document.createElement('div');
+            newBox.className = 'box';
+            newBox.innerHTML = '<h2>O Gabriel é o cara mais legal que você conhece?</h2>';
+
+            const buttonContainer = document.createElement('div');
+            buttonContainer.className = 'box3';
+
+            const yesBtn = document.createElement('button');
+            yesBtn.innerText = 'Sim';
+            yesBtn.addEventListener('click', function() {
+                document.getElementById('celebration').classList.remove('hidden');
+                createConfetti();
+            });
+
+            const noBtn = document.createElement('button');
+            noBtn.innerText = 'Não';
+            noBtn.addEventListener('click', function() {
+                createBox();
+            });
+
+            buttonContainer.appendChild(yesBtn);
+            buttonContainer.appendChild(noBtn);
+            newBox.appendChild(buttonContainer);
+
+            document.body.appendChild(newBox);
+            newBox.style.position = 'absolute';
+            newBox.style.top = Math.random() * (window.innerHeight - 150) + 'px';
+            newBox.style.left = Math.random() * (window.innerWidth - 320) + 'px';
+        }
+
+        function createConfetti() {
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.backgroundColor = getRandomColor();
+                confetti.style.left = Math.random() * window.innerWidth + 'px';
+                confetti.style.top = '-10px';
+                confetti.style.width = Math.random() * 10 + 'px';
+                confetti.style.height = confetti.style.width;
+                confetti.style.animationDuration = Math.random() * 2 + 2 + 's';
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 4000);
+            }
+        }
+
+        function getRandomColor() {
+            const colors = ['#FF5733', '#33FF57', '#3357FF', '#FF33A8', '#FFEB3B', '#00BCD4'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+    </script>
+</body>
+</html>
