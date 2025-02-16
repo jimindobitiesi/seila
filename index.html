@@ -18,8 +18,9 @@
         }
 
         .box {
-            width: 300px;
-            height: 100px;
+            width: 80%;
+            max-width: 300px;
+            height: auto;
             margin: 10px;
             padding: 20px;
             background-color: white;
@@ -35,7 +36,9 @@
 
         .box3 {
             display: flex;
+            flex-direction: column;
             gap: 10px;
+            align-items: center;
         }
 
         button {
@@ -46,6 +49,7 @@
             color: white;
             cursor: pointer;
             transition: background 0.3s;
+            width: 100%;
         }
 
         button:hover {
@@ -90,6 +94,24 @@
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
+        }
+
+        /* Media Query para telas pequenas */
+        @media (max-width: 600px) {
+            .box {
+                width: 90%;
+                padding: 15px;
+            }
+
+            button {
+                width: 80%;
+                padding: 12px;
+            }
+
+            .celebration {
+                font-size: 18px;
+                padding: 15px;
+            }
         }
     </style>
 </head>
